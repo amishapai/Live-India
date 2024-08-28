@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Profile</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h2 class="mt-4">Profile</h2>
+    
+    <h4>User Information</h4>
+    <p><strong>Username:</strong> {{ user.username }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>Language Preferences:</strong> {{ user.language_preferences }}</p>
+    {% if user_type == 'Tourist' %}
+        <p><strong>Destination:</strong> {{ user.destination }}</p>
+    {% elif user_type == 'Tour Guide' %}
+        <p><strong>Location:</strong> {{ user.location }}</p>
+    {% endif %}
+    
+    {% if user_type == 'Tourist' %}
+        <h4>Matching Guides</h4>
+        {% if matching_guides %}
+            <ul class="list-group">
+                {% for guide in matching_guides %}
+                    <li class="list-group-item">
+                        <p><strong>Guide Name:</strong> {{ guide.username }}</p>
+                        <p><strong>Email:</strong> {{ guide.email }}</p>
+                        <p><strong>Language Preferences:</strong> {{ guide.language_preferences }}</p>
+                        <p><strong>Location:</strong> {{ guide.location }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No matching guides found.</p>
+        {% endif %}
+    {% endif %}
+    
+    <a class="btn btn-secondary mt-3" href="/logout">Logout</a>
+</div>
+</body>
+</html>
